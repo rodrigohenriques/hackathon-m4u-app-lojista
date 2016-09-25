@@ -3,6 +3,7 @@ package com.github.fidelity.lio.merchant.ui;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,11 +21,18 @@ import com.github.fidelity.lio.merchant.ui.view.Spinner.SpinnerItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DetailActivity extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindColor(android.R.color.white)
+    int white;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,8 @@ public class DetailActivity extends AppCompatActivity {
         fidelitySpinner.setAdapter(fidelityItemArrayAdapter);
         ButterKnife.bind(this);
 
+        toolbar.setTitle("Detalhe de pedidos");
+        toolbar.setTitleTextColor(white);
     }
 
     private List<FidelityItem> buildFidelityPoints() {
