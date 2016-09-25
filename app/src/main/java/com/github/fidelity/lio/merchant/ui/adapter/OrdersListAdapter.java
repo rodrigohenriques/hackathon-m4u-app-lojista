@@ -15,9 +15,12 @@ import com.github.fidelity.lio.merchant.ui.DetailActivity;
 
 import java.util.List;
 
+import rx.functions.Func1;
+
 public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.OrderViewHolder> {
     private Activity activity;
     private List<Order> orders;
+    private Func1<Long, String> amountFormatter = String::valueOf;
 
     public OrdersListAdapter(Activity activity, List<Order> orders) {
         this.activity = activity;
@@ -37,7 +40,7 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Or
         Order order = orders.get(position);
 
         holder.orderSummary.setText(order.getReference());
-        holder.orderAmount.setText(order.getPrice().toString());
+        holder.orderAmount.setText(amountFormatter.call(order.getPrice().longValue()));
 
         holder.view.setOnClickListener(view -> {
             Intent openDetail = new Intent(activity, DetailActivity.class);
@@ -49,6 +52,10 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Or
     @Override
     public int getItemCount() {
         return orders.size();
+    }
+
+    public void setAmountFormatter(Func1<Long, String> amountFormatter) {
+        this.amountFormatter = amountFormatter;
     }
 
     class OrderViewHolder extends RecyclerView.ViewHolder {
