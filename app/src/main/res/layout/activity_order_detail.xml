@@ -12,8 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:background="?attr/colorPrimary" />
 
     <LinearLayout
         android:elevation="2dp"
@@ -31,6 +30,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/orderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pedido 1234"
@@ -38,6 +38,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/orderDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="25/09/2016 ás "
@@ -60,6 +61,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -105,7 +107,7 @@
 
             <requestFocus/>
 
-            <com.github.fidelity.lio.merchant.ui.view.Spinner
+            <com.github.fidelity.lio.merchant.ui.view.SelectableEditText
                 android:id="@+id/fidelitySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -123,7 +125,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/nameField"
+                android:id="@+id/editTextPoints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Digite a quantidade de pontos"
@@ -142,7 +144,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/quantityPointField"
+                android:id="@+id/editTextDiscount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Digite o valor do desconto"
@@ -163,7 +165,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/oval_button_yellow"
             android:gravity="center"
-            android:text="Concluir pedido"
+            android:text="PAGAR"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 

@@ -24,7 +24,7 @@
             android:name="io.fabric.ApiKey"
             android:value="d48402bdac0edc6886c4ed6c23fb4bea5c874cb8" />
 
-        <activity android:name=".ui.BaseActivity"></activity>
+        <activity android:name=".ui.BaseActivity"/>
     </application>
 
 </manifest>

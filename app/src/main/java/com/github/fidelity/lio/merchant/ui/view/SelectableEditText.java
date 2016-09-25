@@ -15,30 +15,32 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-public class Spinner<T extends Spinner.SpinnerItem> extends EditText implements View.OnClickListener, ActionMode.Callback {
+import com.github.fidelity.lio.merchant.R;
+
+public class SelectableEditText<T extends SelectableEditText.Item> extends EditText implements View.OnClickListener, ActionMode.Callback {
 
     private Context context;
     private OnSpinnerListener<T> onItemSelectedListener;
     private Dialog dialog;
     private ArrayAdapter<T> arrayAdapter;
 
-    public Spinner(Context context) {
+    public SelectableEditText(Context context) {
         super(context);
         this.context = context;
     }
 
-    public Spinner(Context context, AttributeSet attrs) {
+    public SelectableEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
     }
 
-    public Spinner(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SelectableEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Spinner(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SelectableEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.context = context;
     }
@@ -62,7 +64,7 @@ public class Spinner<T extends Spinner.SpinnerItem> extends EditText implements 
     }
 
     private void buildItemsSpinner() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         builder.setAdapter(arrayAdapter, new OnClickListenerToDialog());
         this.dialog = builder.create();
     }
@@ -127,7 +129,7 @@ public class Spinner<T extends Spinner.SpinnerItem> extends EditText implements 
         return super.onTextContextMenuItem(id);
     }
 
-    public interface SpinnerItem {
+    public interface Item {
         @Override
         String toString();
     }
