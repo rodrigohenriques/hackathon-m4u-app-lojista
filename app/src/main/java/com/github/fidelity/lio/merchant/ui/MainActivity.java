@@ -14,6 +14,8 @@ import com.github.fidelity.lio.lojista.domain.RemoteOrderRepository;
 import com.github.fidelity.lio.merchant.MerchantApplication;
 import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.ui.adapter.OrdersListAdapter;
+import com.github.fidelity.lio.merchant.ui.custom.DividerItemDecoration;
+import com.github.fidelity.lio.merchant.utils.formatter.Formatter;
 
 import java.util.List;
 
@@ -26,11 +28,11 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     @Inject RemoteOrderRepository remoteOrderRepository;
+    @Inject Formatter<String, String> currencyFormatter;
 
     @Bind(R.id.orders_list) RecyclerView ordersRecyclerView;
     @Bind(R.id.loading_view) ProgressBar loadingView;
     @Bind(R.id.no_items_view) TextView noItemsView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +66,16 @@ public class MainActivity extends AppCompatActivity {
             noItemsView.setVisibility(View.GONE);
             ordersRecyclerView.setVisibility(View.VISIBLE);
 
+            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+
             OrdersListAdapter ordersListAdapter = new OrdersListAdapter(this, orders);
+            ordersListAdapter.setAmountFormatter(amount -> currencyFormatter.format(amount.toString()));
             ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            ordersRecyclerView.addItemDecoration(itemDecoration);
             ordersRecyclerView.setAdapter(ordersListAdapter);
         } else {
             noItemsView.setVisibility(View.VISIBLE);
             ordersRecyclerView.setVisibility(View.GONE);
         }
     }
-
 }

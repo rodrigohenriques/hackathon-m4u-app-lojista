@@ -4,7 +4,10 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:minHeight="64dp"
-    android:padding="8dp">
+    android:paddingBottom="24dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="24dp">
 
     <ImageView
         android:id="@+id/order_image"
@@ -17,25 +20,41 @@
         android:layout_marginRight="8dp"
         android:src="@android:drawable/ic_menu_agenda" />
 
-    <TextView
-        android:id="@+id/order_summary"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/order_image"
-        android:layout_toRightOf="@+id/order_image"
-        android:ellipsize="end"
-        android:text="Sumario de pedido" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/order_summary"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Sumario de pedido"
+            android:textColor="@color/yellow" />
+
+        <TextView
+            android:id="@+id/order_subtitle"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Aguardando pagamento" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/order_amount"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:text="R$ 45,00" />
+        android:text="R$ 45,00"
+        android:textColor="@color/green" />
 
 </RelativeLayout>
