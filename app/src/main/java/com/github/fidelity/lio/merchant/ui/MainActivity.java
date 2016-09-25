@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ((MerchantApplication) getApplication()).getApplicationComponent().inject(this);
         toolbar.setTitle("Lista de pedidos");
-        toolbar.setBackgroundColor(white);
+        toolbar.setTitleTextColor(white);
     }
 
     @Override
