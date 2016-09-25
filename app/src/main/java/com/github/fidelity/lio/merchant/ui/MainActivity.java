@@ -9,6 +9,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digits.sdk.android.AuthCallback;
+import com.digits.sdk.android.AuthConfig;
+import com.digits.sdk.android.Digits;
+import com.digits.sdk.android.DigitsAuthButton;
+import com.digits.sdk.android.DigitsException;
+import com.digits.sdk.android.DigitsSession;
 import com.github.fidelity.lio.lojista.domain.Order;
 import com.github.fidelity.lio.lojista.domain.RemoteOrderRepository;
 import com.github.fidelity.lio.merchant.MerchantApplication;
@@ -25,11 +31,16 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-    @Inject RemoteOrderRepository remoteOrderRepository;
+    @Inject
+    RemoteOrderRepository remoteOrderRepository;
 
-    @Bind(R.id.orders_list) RecyclerView ordersRecyclerView;
-    @Bind(R.id.loading_view) ProgressBar loadingView;
-    @Bind(R.id.no_items_view) TextView noItemsView;
+    @Bind(R.id.orders_list)
+    RecyclerView ordersRecyclerView;
+    @Bind(R.id.loading_view)
+    ProgressBar loadingView;
+    @Bind(R.id.no_items_view)
+    TextView noItemsView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         ((MerchantApplication) getApplication()).getApplicationComponent().inject(this);
+
+        AuthConfig.Builder authConfigBuilder = new AuthConfig.Builder()
+                .withAuthCallBack(new AuthCallback() {
+                    @Override
+                    public void success(DigitsSession session, String phoneNumber) {
+
+                    }
+
+                    @Override
+                    public void failure(DigitsException error) {
+
+                    }
+                })
+                .withPhoneNumber("+5521967319761");
+
+        Digits.authenticate(authConfigBuilder.build());
     }
 
     @Override
@@ -71,4 +98,5 @@ public class MainActivity extends AppCompatActivity {
             ordersRecyclerView.setVisibility(View.GONE);
         }
     }
+
 }
