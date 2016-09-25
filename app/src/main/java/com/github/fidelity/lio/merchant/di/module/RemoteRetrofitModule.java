@@ -1,12 +1,15 @@
 package com.github.fidelity.lio.merchant.di.module;
 
+import com.github.fidelity.lio.lojista.domain.RemoteFidelityRepository;
 import com.github.fidelity.lio.lojista.domain.RemoteOrderRepository;
 import com.github.fidelity.lio.merchant.di.annotations.AccessToken;
 import com.github.fidelity.lio.merchant.di.annotations.ClientId;
 import com.github.fidelity.lio.merchant.di.annotations.MerchantId;
 import com.github.fidelity.lio.repository.remote.di.annotations.RemoteUrl;
+import com.github.fidelity.lio.repository.remote.retrofit.FidelityApi;
 import com.github.fidelity.lio.repository.remote.retrofit.OrderManagementApi;
 import com.github.fidelity.lio.repository.remote.retrofit.interceptor.RequestInterceptor;
+import com.github.fidelity.lio.repository.remote.retrofit.repository.RemoteFidelityRepositoryImpl;
 import com.github.fidelity.lio.repository.remote.retrofit.repository.RemoteOrderRepositoryImpl;
 import com.google.gson.GsonBuilder;
 
@@ -92,8 +95,19 @@ public class RemoteRetrofitModule {
     }
 
     @Provides
-    RemoteOrderRepository provideRemoteCharactersRepository(RemoteOrderRepositoryImpl
+    FidelityApi provideFidelityApi(Retrofit retrofit) {
+        return retrofit.create(FidelityApi.class);
+    }
+
+    @Provides
+    RemoteOrderRepository provideRemoteOrdersRepository(RemoteOrderRepositoryImpl
                                                                     remoteOrderRepository) {
         return remoteOrderRepository;
+    }
+
+    @Provides
+    RemoteFidelityRepository provideRemoteFidelityRepository(RemoteFidelityRepositoryImpl
+                                                                     remoteFidelityRepository) {
+        return remoteFidelityRepository;
     }
 }

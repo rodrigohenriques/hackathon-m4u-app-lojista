@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             noItemsView.setVisibility(View.GONE);
             ordersRecyclerView.setVisibility(View.VISIBLE);
 
-            OrdersListAdapter ordersListAdapter = new OrdersListAdapter(orders);
+            OrdersListAdapter ordersListAdapter = new OrdersListAdapter(this, orders);
             ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             ordersRecyclerView.setAdapter(ordersListAdapter);
         } else {

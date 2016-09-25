@@ -1,5 +1,7 @@
 package com.github.fidelity.lio.merchant.ui.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +10,17 @@ import android.widget.TextView;
 
 import com.github.fidelity.lio.lojista.domain.Order;
 import com.github.fidelity.lio.merchant.R;
+import com.github.fidelity.lio.merchant.entities.Extra;
+import com.github.fidelity.lio.merchant.ui.OrderDetailActivity;
 
 import java.util.List;
 
 public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.OrderViewHolder> {
+    private Activity activity;
     private List<Order> orders;
 
-    public OrdersListAdapter(List<Order> orders) {
+    public OrdersListAdapter(Activity activity, List<Order> orders) {
+        this.activity = activity;
         this.orders = orders;
     }
 
@@ -32,6 +38,12 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Or
 
         holder.orderSummary.setText(order.getReference());
         holder.orderAmount.setText(order.getPrice().toString());
+
+        holder.view.setOnClickListener(view -> {
+            Intent openDetail = new Intent(activity, OrderDetailActivity.class);
+            openDetail.putExtra(Extra.ORDER, order);
+            activity.startActivity(openDetail);
+        });
     }
 
     @Override
@@ -40,13 +52,15 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Or
     }
 
     class OrderViewHolder extends RecyclerView.ViewHolder {
+        View view;
         TextView orderSummary;
         TextView orderAmount;
 
         OrderViewHolder(View itemView) {
             super(itemView);
-            orderSummary = (TextView) itemView.findViewById(R.id.order_summary);
-            orderAmount = (TextView) itemView.findViewById(R.id.order_amount);
+            this.orderSummary = (TextView) itemView.findViewById(R.id.order_summary);
+            this.orderAmount = (TextView) itemView.findViewById(R.id.order_amount);
+            this.view = itemView;
         }
     }
 }

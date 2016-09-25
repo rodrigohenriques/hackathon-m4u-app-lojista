@@ -2,9 +2,10 @@ package com.github.fidelity.lio.lojista.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     private String id = null;
     private String number = null;
     private String reference = null;
