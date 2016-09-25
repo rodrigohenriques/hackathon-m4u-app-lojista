@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+
+def compileDependencies = rootProject.ext.dependencies
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile project(':domain')
+
+    compile 'javax.inject:javax.inject:1'
+
+    compile compileDependencies.rxandroid
+
+    compile compileDependencies.retrofit
+    compile compileDependencies.retrofit_converter_gson
+    compile compileDependencies.retrofit_rx_java
+    compile compileDependencies.okhttp
+    compile compileDependencies.okhttp3_logging_interceptor
+
+    provided compileDependencies.jsr250
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+}

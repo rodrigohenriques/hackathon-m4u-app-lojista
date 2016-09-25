@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def compileDependencies = rootProject.ext.dependencies
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    defaultConfig {
+        applicationId "com.github.fidelity.lio.lojista"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile project(':domain')
+    compile project(':repository-remote-retrofit')
+
+    compile compileDependencies.support_v7
+    compile compileDependencies.butterknife
+    compile compileDependencies.recyclerView
+    compile compileDependencies.cardview
+    compile compileDependencies.support_design
+
+    compile compileDependencies.dagger2
+    apt compileDependencies.dagger2_compiler
+    provided compileDependencies.jsr250
+
+    compile compileDependencies.retrofit
+    compile compileDependencies.retrofit_converter_gson
+    compile compileDependencies.retrofit_rx_java
+    compile compileDependencies.okhttp
+    compile compileDependencies.okhttp3_logging_interceptor
+
+    compile compileDependencies.rxkotlin
+    compile compileDependencies.rxandroid
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.1.0'
+    testCompile 'junit:junit:4.12'
+}
