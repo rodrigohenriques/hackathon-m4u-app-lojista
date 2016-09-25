@@ -49,22 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         ((MerchantApplication) getApplication()).getApplicationComponent().inject(this);
-
-        AuthConfig.Builder authConfigBuilder = new AuthConfig.Builder()
-                .withAuthCallBack(new AuthCallback() {
-                    @Override
-                    public void success(DigitsSession session, String phoneNumber) {
-
-                    }
-
-                    @Override
-                    public void failure(DigitsException error) {
-
-                    }
-                })
-                .withPhoneNumber("+5521967319761");
-
-        Digits.authenticate(authConfigBuilder.build());
     }
 
     @Override
