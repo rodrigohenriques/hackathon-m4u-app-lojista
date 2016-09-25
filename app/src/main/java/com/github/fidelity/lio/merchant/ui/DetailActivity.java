@@ -23,6 +23,7 @@ import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.entities.Extra;
 import com.github.fidelity.lio.merchant.ui.view.SelectableEditText;
 import com.github.fidelity.lio.merchant.ui.view.SelectableEditText.Item;
+import com.github.fidelity.lio.merchant.utils.formatter.DateTimeFormatter;
 import com.github.fidelity.lio.merchant.utils.formatter.Formatter;
 
 import java.util.ArrayList;
@@ -39,26 +40,18 @@ import rx.schedulers.Schedulers;
 
 public class DetailActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.orderId)
-    TextView orderId;
-    @Bind(R.id.orderDate)
-    TextView orderDate;
-    @Bind(R.id.amount)
-    TextView amount;
-    @Bind(R.id.editTextPoints)
-    EditText editTextPoints;
-    @Bind(R.id.editTextDiscount)
-    EditText editTextDiscount;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.orderId) TextView orderId;
+    @Bind(R.id.orderDate) TextView orderDate;
+    @Bind(R.id.amount) TextView amount;
+    @Bind(R.id.editTextPoints) EditText editTextPoints;
+    @Bind(R.id.editTextDiscount) EditText editTextDiscount;
 
-    @Inject
-    RemoteFidelityRepository remoteFidelityRepository;
-    @Inject
-    Formatter<String, String> currencyFormatter;
+    @Inject RemoteFidelityRepository remoteFidelityRepository;
+    @Inject Formatter<String, String> currencyFormatter;
+    @Inject DateTimeFormatter dateTimeFormatter;
 
-    @BindColor(android.R.color.white)
-    int white;
+    @BindColor(android.R.color.white) int white;
 
     private Order order;
     FidelityItem fidelityItem;
@@ -83,7 +76,7 @@ public class DetailActivity extends BaseActivity {
         String remaining = order.getRemaining().toString();
 
         orderId.setText(order.getNumber());
-        orderDate.setText(order.getCreatedAt());
+        orderDate.setText(dateTimeFormatter.format(order.getCreatedAt()));
         amount.setText(currencyFormatter.format(remaining));
 
 
