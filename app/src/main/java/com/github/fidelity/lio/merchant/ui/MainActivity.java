@@ -1,7 +1,6 @@
 package com.github.fidelity.lio.merchant.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,7 +23,7 @@ import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     @Inject RemoteOrderRepository remoteOrderRepository;
 
     @Bind(R.id.orders_list) RecyclerView ordersRecyclerView;

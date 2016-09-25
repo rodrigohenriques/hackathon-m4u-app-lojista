@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    tools:ignore="MissingPrefix">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/yellow"
         android:text="Confirme o pagamento"
-        android:textSize="18sp" />
+        android:textSize="20sp"
+        fontPath="fonts/Museo500-Regular.otf"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Infor o número do telefone cadastrado" />
-
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Infor o número do telefone cadastrado"
+        fontPath="fonts/museosans-500.otf"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        fontPath="fonts/museosans-500.otf">
 
         <EditText
             android:id="@+id/quantityPointField"
@@ -33,23 +46,21 @@
             android:maxLength="4"
             android:singleLine="true"
             android:textSize="16sp" />
-
-
     </android.support.design.widget.TextInputLayout>
-
 
     <Button
         android:id="@+id/smsReceiver"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/oval_button_yellow"
         android:gravity="center"
         android:text="Receber SMS"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
-
+        android:textSize="20sp"
+        fontPath="fonts/Museo300-Regular.otf"/>
 
 </LinearLayout>
