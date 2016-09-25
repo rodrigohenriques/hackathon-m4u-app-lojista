@@ -87,7 +87,7 @@ public class DetailActivity extends BaseActivity {
     private List<FidelityItem> buildFidelityPoints() {
         List<FidelityItem> fidelityItems = new ArrayList<>();
         fidelityItems.add(new FidelityItem("DOTZ"));
-        fidelityItems.add(new FidelityItem("LIVERO"));
+        fidelityItems.add(new FidelityItem("LIVELO"));
         fidelityItems.add(new FidelityItem("MULTIPLUS"));
         fidelityItems.add(new FidelityItem("SMILES"));
         return fidelityItems;
@@ -118,15 +118,22 @@ public class DetailActivity extends BaseActivity {
                     .withAuthCallBack(new AuthCallback() {
                         @Override
                         public void success(DigitsSession session, String phoneNumber) {
+                            Long amount;
+                            if (editTextDiscount.getText().toString().equals("") || editTextDiscount.getText().toString().isEmpty()) {
+                                amount = Long.valueOf(order.getRemaining());
+                            } else {
+                                amount = Long.valueOf(editTextDiscount.getText().toString());
+                            }
                             remoteFidelityRepository.checkoutOrder("00000000000100", order.getId(),
-                                    Long.valueOf(editTextPoints.getText().toString()),
-                                    order.getPrice().longValue(),
+                                    Long.valueOf(editTextPoints.getText().toString()), amount,
                                     fidelityItem.name.toLowerCase(), "+5521979442064")
+                                    .defaultIfEmpty(null)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(
                                             aVoid -> {
                                                 Toast.makeText(DetailActivity.this, "Transação executada com sucesso", Toast.LENGTH_LONG).show();
+                                                onBackPressed();
                                             },
                                             error -> {
                                                 Toast.makeText(DetailActivity.this, "Erro: " + error.getMessage(), Toast.LENGTH_LONG).show();
@@ -136,7 +143,7 @@ public class DetailActivity extends BaseActivity {
 
                         @Override
                         public void failure(DigitsException error) {
-
+                            Toast.makeText(DetailActivity.this, "Erro ao validar SMS Token: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     })
                     .withPhoneNumber("+55" + phoneNumberField.getText().toString());
