@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,24 +15,37 @@ import com.github.fidelity.lio.lojista.domain.RemoteOrderRepository;
 import com.github.fidelity.lio.merchant.MerchantApplication;
 import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.ui.adapter.OrdersListAdapter;
+import com.github.fidelity.lio.merchant.ui.custom.DividerItemDecoration;
+import com.github.fidelity.lio.merchant.utils.formatter.Formatter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-    @Inject RemoteOrderRepository remoteOrderRepository;
-    @Inject Formatter<String, String> currencyFormatter;
+    @Inject
+    RemoteOrderRepository remoteOrderRepository;
+    @Inject
+    Formatter<String, String> currencyFormatter;
 
-    @Bind(R.id.orders_list) RecyclerView ordersRecyclerView;
-    @Bind(R.id.loading_view) ProgressBar loadingView;
-    @Bind(R.id.no_items_view) TextView noItemsView;
+    @Bind(R.id.orders_list)
+    RecyclerView ordersRecyclerView;
+    @Bind(R.id.loading_view)
+    ProgressBar loadingView;
+    @Bind(R.id.no_items_view)
+    TextView noItemsView;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindColor(android.R.color.white)
+    int white;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
