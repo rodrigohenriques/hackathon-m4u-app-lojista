@@ -47,6 +47,7 @@ dependencies {
     compile project(':domain')
     compile project(':repository-remote-retrofit')
 
+    compile compileDependencies.calligraphy
     compile compileDependencies.support_v7
     compile compileDependencies.butterknife
     compile compileDependencies.recyclerView

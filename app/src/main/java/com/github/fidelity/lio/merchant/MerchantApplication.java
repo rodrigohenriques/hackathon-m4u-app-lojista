@@ -9,7 +9,9 @@ import com.github.fidelity.lio.merchant.di.module.ApplicationModule;
 import com.github.fidelity.lio.merchant.di.module.RemoteRetrofitModule;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
+
 import io.fabric.sdk.android.Fabric;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class MerchantApplication extends Application {
 
@@ -24,6 +26,12 @@ public class MerchantApplication extends Application {
         super.onCreate();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Museo500-Regular.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
         this.applicationComponent = DaggerApplicationComponent.builder()
                                     .applicationModule(new ApplicationModule(this))

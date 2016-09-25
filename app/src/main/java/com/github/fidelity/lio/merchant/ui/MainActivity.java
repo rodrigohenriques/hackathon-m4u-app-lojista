@@ -28,18 +28,13 @@ import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
-    @Inject
-    RemoteOrderRepository remoteOrderRepository;
-    @Inject
-    Formatter<String, String> currencyFormatter;
+public class MainActivity extends BaseActivity {
+    @Inject RemoteOrderRepository remoteOrderRepository;
+    @Inject Formatter<String, String> currencyFormatter;
 
-    @Bind(R.id.orders_list)
-    RecyclerView ordersRecyclerView;
-    @Bind(R.id.loading_view)
-    ProgressBar loadingView;
-    @Bind(R.id.no_items_view)
-    TextView noItemsView;
+    @Bind(R.id.orders_list) RecyclerView ordersRecyclerView;
+    @Bind(R.id.loading_view) ProgressBar loadingView;
+    @Bind(R.id.no_items_view) TextView noItemsView;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
