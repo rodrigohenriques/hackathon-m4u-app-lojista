@@ -65,9 +65,9 @@ public class Order implements Serializable {
     public Integer getRemaining() {
         Observable.from(transactions)
                 .map(Transaction::getAmount)
-                .reduce(0, (a, b) -> a + b.intValue())
+                .reduce(price, (a, b) -> a - b.intValue())
                 .subscribe(r -> remaining = r);
 
-        return remaining;
+        return remaining >= 0 ? remaining : 0;
     }
 }
