@@ -89,8 +89,6 @@
             android:layout_height="wrap_content"
             android:text="Caso o valor do desconto não for preenchido, será debitado o valor integral do pedido."
             android:textColor="@color/yellow" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -103,7 +101,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <requestFocus/>
 
             <com.github.fidelity.lio.merchant.ui.view.Spinner
                 android:id="@+id/fidelitySpinner"
@@ -113,7 +110,9 @@
                 android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                 android:hint="Selecione o plano fidelidade"
                 android:imeOptions="actionNone"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false">
+                <requestFocus/>
+            </com.github.fidelity.lio.merchant.ui.view.Spinner>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -151,7 +150,6 @@
                 android:maxLength="4"
                 android:singleLine="true"
                 android:textSize="16sp" />
-
 
         </android.support.design.widget.TextInputLayout>
 

@@ -2,7 +2,6 @@ package com.github.fidelity.lio.merchant.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,11 +28,9 @@ import butterknife.OnClick;
 
 public class DetailActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    @Bind(R.id.toolbar) Toolbar toolbar;
 
-    @BindColor(android.R.color.white)
-    int white;
+    @BindColor(android.R.color.white) int white;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +38,11 @@ public class DetailActivity extends BaseActivity {
         setContentView(R.layout.activity_order_detail);
 
         List<FidelityItem> fidelityPoints = buildFidelityPoints();
-        ArrayAdapter<FidelityItem> fidelityItemArrayAdapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, fidelityPoints);
+        ArrayAdapter<FidelityItem> fidelityItemArrayAdapter = new ArrayAdapter<>(getBaseContext(),
+                android.R.layout.simple_spinner_dropdown_item, fidelityPoints);
 
-        Spinner<FidelityItem> fidelitySpinner = (Spinner<FidelityItem>) findViewById(R.id.fidelitySpinner);
+        Spinner<FidelityItem> fidelitySpinner = (Spinner<FidelityItem>)
+                findViewById(R.id.fidelitySpinner);
         fidelitySpinner.setAdapter(fidelityItemArrayAdapter);
         ButterKnife.bind(this);
 

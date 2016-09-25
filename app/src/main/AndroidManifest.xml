@@ -7,7 +7,7 @@
     <application
         android:name=".MerchantApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_login"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -24,7 +24,7 @@
             android:name="io.fabric.ApiKey"
             android:value="d48402bdac0edc6886c4ed6c23fb4bea5c874cb8" />
 
-        <activity android:name=".ui.BaseActivity"></activity>
+        <activity android:name=".ui.BaseActivity"/>
     </application>
 
 </manifest>
