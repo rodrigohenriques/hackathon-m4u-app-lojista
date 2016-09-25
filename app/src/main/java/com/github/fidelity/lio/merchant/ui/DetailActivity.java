@@ -22,6 +22,7 @@ import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.entities.Extra;
 import com.github.fidelity.lio.merchant.ui.view.SelectableEditText;
 import com.github.fidelity.lio.merchant.ui.view.SelectableEditText.Item;
+import com.github.fidelity.lio.merchant.utils.formatter.DateTimeFormatter;
 import com.github.fidelity.lio.merchant.utils.formatter.Formatter;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class DetailActivity extends BaseActivity {
     @Bind(R.id.editTextDiscount) EditText editTextDiscount;
 
     @Inject Formatter<String, String> currencyFormatter;
+    @Inject DateTimeFormatter dateTimeFormatter;
 
     @BindColor(android.R.color.white) int white;
 
@@ -69,7 +71,7 @@ public class DetailActivity extends BaseActivity {
         String remaining = order.getRemaining().toString();
 
         orderId.setText(order.getNumber());
-        orderDate.setText(order.getCreatedAt());
+        orderDate.setText(dateTimeFormatter.format(order.getCreatedAt()));
         amount.setText(currencyFormatter.format(remaining));
 
 
