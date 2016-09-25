@@ -1,8 +1,10 @@
 package com.github.fidelity.lio.merchant.ui;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,23 +15,32 @@ import com.github.fidelity.lio.lojista.domain.RemoteOrderRepository;
 import com.github.fidelity.lio.merchant.MerchantApplication;
 import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.ui.adapter.OrdersListAdapter;
+import com.github.fidelity.lio.merchant.ui.custom.DividerItemDecoration;
+import com.github.fidelity.lio.merchant.utils.formatter.Formatter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
     @Inject RemoteOrderRepository remoteOrderRepository;
+    @Inject Formatter<String, String> currencyFormatter;
 
     @Bind(R.id.orders_list) RecyclerView ordersRecyclerView;
     @Bind(R.id.loading_view) ProgressBar loadingView;
     @Bind(R.id.no_items_view) TextView noItemsView;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindColor(android.R.color.white)
+    int white;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,8 @@ public class MainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
         ((MerchantApplication) getApplication()).getApplicationComponent().inject(this);
+        toolbar.setTitle("Lista de pedidos");
+        toolbar.setTitleTextColor(white);
     }
 
     @Override
@@ -63,8 +76,12 @@ public class MainActivity extends BaseActivity {
             noItemsView.setVisibility(View.GONE);
             ordersRecyclerView.setVisibility(View.VISIBLE);
 
+            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+
             OrdersListAdapter ordersListAdapter = new OrdersListAdapter(this, orders);
+            ordersListAdapter.setAmountFormatter(amount -> currencyFormatter.format(amount.toString()));
             ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            ordersRecyclerView.addItemDecoration(itemDecoration);
             ordersRecyclerView.setAdapter(ordersListAdapter);
         } else {
             noItemsView.setVisibility(View.VISIBLE);

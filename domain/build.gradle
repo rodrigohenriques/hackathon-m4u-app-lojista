@@ -9,6 +9,3 @@ dependencies {
     compile compileDependencies.rxjava
     compile 'javax.inject:javax.inject:1'
 }
-
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
