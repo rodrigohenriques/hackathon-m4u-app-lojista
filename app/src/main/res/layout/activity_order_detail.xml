@@ -114,7 +114,7 @@
                 android:imeOptions="actionNone"
                 android:textIsSelectable="false">
                 <requestFocus/>
-            </com.github.fidelity.lio.merchant.ui.view.Spinner>
+            </com.github.fidelity.lio.merchant.ui.view.SelectableEditText>
 
         </android.support.design.widget.TextInputLayout>
 

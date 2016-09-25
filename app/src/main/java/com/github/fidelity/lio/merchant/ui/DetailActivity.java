@@ -17,6 +17,7 @@ import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
 import com.github.fidelity.lio.lojista.domain.Order;
+import com.github.fidelity.lio.lojista.domain.RemoteFidelityRepository;
 import com.github.fidelity.lio.merchant.MerchantApplication;
 import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.entities.Extra;
@@ -33,20 +34,33 @@ import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class DetailActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.orderId) TextView orderId;
-    @Bind(R.id.orderDate) TextView orderDate;
-    @Bind(R.id.amount) TextView amount;
-    @Bind(R.id.editTextPoints) EditText editTextPoints;
-    @Bind(R.id.editTextDiscount) EditText editTextDiscount;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.orderId)
+    TextView orderId;
+    @Bind(R.id.orderDate)
+    TextView orderDate;
+    @Bind(R.id.amount)
+    TextView amount;
+    @Bind(R.id.editTextPoints)
+    EditText editTextPoints;
+    @Bind(R.id.editTextDiscount)
+    EditText editTextDiscount;
 
-    @Inject Formatter<String, String> currencyFormatter;
+    @Inject
+    RemoteFidelityRepository remoteFidelityRepository;
+    @Inject
+    Formatter<String, String> currencyFormatter;
 
-    @BindColor(android.R.color.white) int white;
+    @BindColor(android.R.color.white)
+    int white;
 
+    private Order order;
     FidelityItem fidelityItem;
 
     @Override
@@ -64,7 +78,7 @@ public class DetailActivity extends BaseActivity {
         fidelitySelectableEditText.setAdapter(fidelityItemArrayAdapter);
         fidelitySelectableEditText.setOnItemSelectedListener((item, selectedIndex) -> fidelityItem = item);
 
-        Order order = (Order) getIntent().getSerializableExtra(Extra.ORDER);
+        order = (Order) getIntent().getSerializableExtra(Extra.ORDER);
 
         String remaining = order.getRemaining().toString();
 
@@ -111,7 +125,20 @@ public class DetailActivity extends BaseActivity {
                     .withAuthCallBack(new AuthCallback() {
                         @Override
                         public void success(DigitsSession session, String phoneNumber) {
-
+                            remoteFidelityRepository.checkoutOrder("00000000000100", order.getId(),
+                                    Long.valueOf(editTextPoints.getText().toString()),
+                                    order.getPrice().longValue(),
+                                    fidelityItem.name.toLowerCase(), "+5521979442064")
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            aVoid -> {
+                                                Toast.makeText(DetailActivity.this, "Transação executada com sucesso", Toast.LENGTH_LONG).show();
+                                            },
+                                            error -> {
+                                                Toast.makeText(DetailActivity.this, "Erro: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                    );
                         }
 
                         @Override
