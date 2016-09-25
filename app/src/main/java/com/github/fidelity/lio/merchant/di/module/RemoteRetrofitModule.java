@@ -2,10 +2,11 @@ package com.github.fidelity.lio.merchant.di.module;
 
 import com.github.fidelity.lio.lojista.domain.RemoteFidelityRepository;
 import com.github.fidelity.lio.lojista.domain.RemoteOrderRepository;
-import com.github.fidelity.lio.merchant.di.annotations.AccessToken;
-import com.github.fidelity.lio.merchant.di.annotations.ClientId;
-import com.github.fidelity.lio.merchant.di.annotations.MerchantId;
-import com.github.fidelity.lio.repository.remote.di.annotations.RemoteUrl;
+import com.github.fidelity.lio.lojista.domain.annotations.AccessToken;
+import com.github.fidelity.lio.lojista.domain.annotations.ClientId;
+import com.github.fidelity.lio.lojista.domain.annotations.MerchantId;
+import com.github.fidelity.lio.repository.remote.di.annotations.Fidelity;
+import com.github.fidelity.lio.repository.remote.di.annotations.Lio;
 import com.github.fidelity.lio.repository.remote.retrofit.FidelityApi;
 import com.github.fidelity.lio.repository.remote.retrofit.OrderManagementApi;
 import com.github.fidelity.lio.repository.remote.retrofit.interceptor.RequestInterceptor;
@@ -26,9 +27,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RemoteRetrofitModule {
 
     @Provides
-    @RemoteUrl
-    String provideRemoteUrl() {
+    @Lio
+    String provideLioRemoteUrl() {
         return "https://api.cielo.com.br/sandbox-lio/order-management/v1/";
+    }
+
+    @Provides
+    @Fidelity
+    String provideFidelityRemoteUrl() {
+        return "https://lio-fidelidade.herokuapp.com/api/";
     }
 
     @Provides
@@ -80,22 +87,28 @@ public class RemoteRetrofitModule {
     }
 
     @Provides
-    Retrofit provideRetrofit(@RemoteUrl String remoteUrl, OkHttpClient okHttpClient,
-                             Converter.Factory converterFactory) {
-        return new Retrofit.Builder().baseUrl(remoteUrl)
+    OrderManagementApi provideOrderManagementApi(@Lio String remoteUrl,
+                                                 OkHttpClient okHttpClient,
+                                                 Converter.Factory converterFactory) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(remoteUrl)
                 .client(okHttpClient)
                 .addConverterFactory(converterFactory)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-    }
 
-    @Provides
-    OrderManagementApi provideOrderManagementApi(Retrofit retrofit) {
         return retrofit.create(OrderManagementApi.class);
     }
 
     @Provides
-    FidelityApi provideFidelityApi(Retrofit retrofit) {
+    FidelityApi provideFidelityApi(@Fidelity String remoteUrl,
+                                   OkHttpClient okHttpClient,
+                                   Converter.Factory converterFactory) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(remoteUrl)
+                .client(okHttpClient)
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
         return retrofit.create(FidelityApi.class);
     }
 

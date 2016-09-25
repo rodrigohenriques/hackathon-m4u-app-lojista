@@ -2,7 +2,9 @@ package com.github.fidelity.lio.lojista.domain;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
     private String sku = null;
     private String name = null;
     private String description = null;

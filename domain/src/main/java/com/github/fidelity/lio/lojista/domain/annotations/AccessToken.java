@@ -1,4 +1,4 @@
-package com.github.fidelity.lio.merchant.di.annotations;
+package com.github.fidelity.lio.lojista.domain.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

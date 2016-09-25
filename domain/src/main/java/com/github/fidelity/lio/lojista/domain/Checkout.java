@@ -1,28 +1,28 @@
 package com.github.fidelity.lio.lojista.domain;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Checkout {
-    @SerializedName("merchant_id")
+    private String merchant;
     private String merchantId;
-    @SerializedName("order_id")
+    private String accessToken;
+    private String clientId;
     private String orderId;
-    @SerializedName("points_quantity")
-    private String pointsQuantity;
-    private String amount;
-    @SerializedName("fidelity_channel")
+    private Long points;
+    private Long amount;
     private String fidelityChannel;
-    @SerializedName("phone_number")
-    private String phoneNumber;
+    private String phone;
 
-    public Checkout(String merchantId, String orderId, String pointsQuantity, String amount,
-                    String fidelityChannel, String phoneNumber) {
+    public Checkout(String merchantId, String accessToken, String clientId, String merchant,
+                    String orderId, Long points, Long amount, String fidelityChannel,
+                    String phone) {
+        this.merchant = merchant;
         this.merchantId = merchantId;
+        this.accessToken = accessToken;
+        this.clientId = clientId;
         this.orderId = orderId;
-        this.pointsQuantity = pointsQuantity;
+        this.points = points;
         this.amount = amount;
         this.fidelityChannel = fidelityChannel;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
     }
 
     public String getMerchantId() {
@@ -41,19 +41,19 @@ public class Checkout {
         this.orderId = orderId;
     }
 
-    public String getPointsQuantity() {
-        return pointsQuantity;
+    public Long getPoints() {
+        return points;
     }
 
-    public void setPointsQuantity(String pointsQuantity) {
-        this.pointsQuantity = pointsQuantity;
+    public void setPoints(Long points) {
+        this.points = points;
     }
 
-    public String getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
@@ -65,11 +65,35 @@ public class Checkout {
         this.fidelityChannel = fidelityChannel;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
     }
 }

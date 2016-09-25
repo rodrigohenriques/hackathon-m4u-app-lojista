@@ -10,4 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.github.fidelity.lio.merchant.ui.DetailActivity">
 
+    <EditText
+        android:id="@+id/points"
+        android:hint="Pontos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/checkout"
+        android:hint="CHECKOUT"
+        android:layout_below="@+id/points"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
