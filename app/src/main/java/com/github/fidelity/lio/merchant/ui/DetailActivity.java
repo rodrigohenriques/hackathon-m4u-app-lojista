@@ -1,5 +1,6 @@
 package com.github.fidelity.lio.merchant.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,7 @@ public class DetailActivity extends BaseActivity {
     @Inject DateTimeFormatter dateTimeFormatter;
 
     @BindColor(android.R.color.white) int white;
+    private ProgressDialog progressDialog;
 
     private Order order;
     FidelityItem fidelityItem;
@@ -124,13 +126,17 @@ public class DetailActivity extends BaseActivity {
                                     fidelityItem.name.toLowerCase(), "+5521979442064")
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
+                                    .doOnSubscribe(() -> progressDialog = ProgressDialog.show(DetailActivity.this, "Aguarde", "Processando transação...", true, false))
                                     .subscribe(
                                             aVoid -> {
                                                 Toast.makeText(DetailActivity.this, "Transação executada com sucesso", Toast.LENGTH_LONG).show();
+                                                finish();
                                             },
                                             error -> {
                                                 Toast.makeText(DetailActivity.this, "Erro: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                                            }
+                                                progressDialog.dismiss();
+                                            },
+                                            () -> progressDialog.dismiss()
                                     );
                         }
 
