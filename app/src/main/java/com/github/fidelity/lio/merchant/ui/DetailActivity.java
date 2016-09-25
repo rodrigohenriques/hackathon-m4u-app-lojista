@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.AuthConfig;
@@ -52,10 +53,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private List<FidelityItem> buildFidelityPoints() {
         List<FidelityItem> fidelityItems = new ArrayList<>();
-        fidelityItems.add(new FidelityItem("DOTS"));
+        fidelityItems.add(new FidelityItem("DOTZ"));
         fidelityItems.add(new FidelityItem("LIVERO"));
         fidelityItems.add(new FidelityItem("MULTIPLUS"));
-        fidelityItems.add(new FidelityItem("SMYLES"));
+        fidelityItems.add(new FidelityItem("SMILES"));
         return fidelityItems;
     }
 
@@ -68,9 +69,11 @@ public class DetailActivity extends AppCompatActivity {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.phone_number_dialog, null);
+
         dialogBuilder.setView(dialogView);
 
         Button smsReceiver = (Button) dialogView.findViewById(R.id.smsReceiver);
+        EditText phoneNumberField = (EditText) dialogView.findViewById(R.id.phoneNumberField);
         smsReceiver.setOnClickListener(view -> {
             AuthConfig.Builder authConfigBuilder = new AuthConfig.Builder()
                     .withAuthCallBack(new AuthCallback() {
@@ -84,7 +87,7 @@ public class DetailActivity extends AppCompatActivity {
 
                         }
                     })
-                    .withPhoneNumber("+5521967319761");
+                    .withPhoneNumber("+55" + phoneNumberField.getText().toString());
 
             Digits.authenticate(authConfigBuilder.build());
         });
