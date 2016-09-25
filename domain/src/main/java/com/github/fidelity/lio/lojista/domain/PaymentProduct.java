@@ -2,9 +2,10 @@ package com.github.fidelity.lio.lojista.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PaymentProduct {
+public class PaymentProduct implements Serializable {
     private String id = null;
     @SerializedName("transaction_type")
     private String transactionType = null;
