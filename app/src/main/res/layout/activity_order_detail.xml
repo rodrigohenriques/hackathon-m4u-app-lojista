@@ -5,6 +5,8 @@
     android:id="@+id/activity_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="com.github.fidelity.lio.merchant.ui.DetailActivity">
 
@@ -15,10 +17,10 @@
         android:background="?attr/colorPrimary" />
 
     <LinearLayout
-        android:elevation="2dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#F6F6F6"
+        android:elevation="2dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="20dp">
@@ -113,8 +115,9 @@
                 android:hint="Selecione o plano fidelidade"
                 android:imeOptions="actionNone"
                 android:textIsSelectable="false">
-                <requestFocus/>
-            </com.github.fidelity.lio.merchant.ui.view.Spinner>
+
+                <requestFocus />
+            </com.github.fidelity.lio.merchant.ui.view.SelectableEditText>
 
         </android.support.design.widget.TextInputLayout>
 
