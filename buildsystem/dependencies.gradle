@@ -1,5 +1,5 @@
 ext {
-    def compat_version = '23.4.0'
+    def compat_version = '24.2.0'
     def retrofit_version = '2.1.0'
     def dagger_version = '2.0.2'
 
