@@ -37,13 +37,13 @@
         fontPath="fonts/museosans-500.otf">
 
         <EditText
-            android:id="@+id/quantityPointField"
+            android:id="@+id/phoneNumberField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Telefone"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:maxLength="4"
+            android:maxLength="11"
             android:singleLine="true"
             android:textSize="16sp" />
     </android.support.design.widget.TextInputLayout>
