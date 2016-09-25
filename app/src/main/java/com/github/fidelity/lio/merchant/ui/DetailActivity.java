@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.github.fidelity.lio.merchant.R;
 
-public class OrderDetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

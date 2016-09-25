@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.github.fidelity.lio.lojista.domain.Order;
 import com.github.fidelity.lio.merchant.R;
 import com.github.fidelity.lio.merchant.entities.Extra;
-import com.github.fidelity.lio.merchant.ui.OrderDetailActivity;
+import com.github.fidelity.lio.merchant.ui.DetailActivity;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Or
         holder.orderAmount.setText(order.getPrice().toString());
 
         holder.view.setOnClickListener(view -> {
-            Intent openDetail = new Intent(activity, OrderDetailActivity.class);
+            Intent openDetail = new Intent(activity, DetailActivity.class);
             openDetail.putExtra(Extra.ORDER, order);
             activity.startActivity(openDetail);
         });
