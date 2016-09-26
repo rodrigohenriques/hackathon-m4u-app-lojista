@@ -1,2 +1,2 @@
-# lio-fidelidade-lojista
+# hackathon-m4u-app-lojista
 Aplicativo do lojista.
